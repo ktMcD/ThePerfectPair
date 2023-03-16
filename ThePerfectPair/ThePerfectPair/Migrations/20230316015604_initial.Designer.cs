@@ -11,7 +11,7 @@ using ThePerfectPair.DAL;
 namespace ThePerfectPair.Migrations
 {
     [DbContext(typeof(PerfectPairContext))]
-    [Migration("20230316013114_initial")]
+    [Migration("20230316015604_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -88,6 +88,35 @@ namespace ThePerfectPair.Migrations
                     b.ToTable("Foods");
                 });
 
+            modelBuilder.Entity("ThePerfectPair.Models.Rating", b =>
+                {
+                    b.Property<int>("RatingId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RatingId"), 1L, 1);
+
+                    b.Property<int>("DrinkId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FoodId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RatingNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserComments")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RatingId");
+
+                    b.HasIndex("DrinkId");
+
+                    b.HasIndex("FoodId");
+
+                    b.ToTable("Ratings");
+                });
+
             modelBuilder.Entity("ThePerfectPair.Models.Drink", b =>
                 {
                     b.HasOne("ThePerfectPair.Models.Category", "Category")
@@ -108,6 +137,25 @@ namespace ThePerfectPair.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("ThePerfectPair.Models.Rating", b =>
+                {
+                    b.HasOne("ThePerfectPair.Models.Drink", "Drink")
+                        .WithMany()
+                        .HasForeignKey("DrinkId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ThePerfectPair.Models.Food", "Food")
+                        .WithMany()
+                        .HasForeignKey("FoodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Drink");
+
+                    b.Navigation("Food");
                 });
 
             modelBuilder.Entity("ThePerfectPair.Models.Category", b =>

@@ -19,7 +19,7 @@ namespace ThePerfectPair.DAL
     public DbSet<Category> Categories { get; set; }
     public DbSet<Drink> Drinks { get; set; }
     public DbSet<Food> Foods { get; set; }
-    //public DbSet<Rating> Ratings { get; set; }
+    public DbSet<Rating> Ratings { get; set; }
 
     private static IConfigurationRoot _configuration;
 
