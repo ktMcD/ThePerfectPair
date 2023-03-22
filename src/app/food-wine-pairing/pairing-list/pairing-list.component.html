@@ -11,7 +11,7 @@
         <button>Pair By Wine:</button>
     </form>
 </div>
-
+<button (click)="getRandomRecipe()">Get random food</button>
 <p>{{header}}</p>
 <ul>
     <li *ngFor="let pairing of pairedWines">{{pairing}}</li>
