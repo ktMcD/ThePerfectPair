@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ThePerfectPair.Models;
 
 namespace ThePerfectPair.DAL
@@ -13,16 +14,25 @@ namespace ThePerfectPair.DAL
       return _dbContext.Foods.ToList();
     }
 
-    public Food AddFood(Food food)
+    public bool AddFood(Food food)
     {
-      _dbContext.Foods.Add(food);
-      _dbContext.SaveChanges();
-      return GetLatestFood();
-    }
 
+      if (FindById(food.spoonacularId) == null)
+      {
+        _dbContext.Foods.Add(food);
+        _dbContext.SaveChanges();
+        return true;
+      }
+      return false;
+    }
     public Food GetLatestFood()
     {
       return _dbContext.Foods.OrderByDescending(x => x.FoodId).FirstOrDefault();
+    }
+
+    public Food FindById(int id)
+    {
+      return _dbContext.Foods.AsNoTracking().FirstOrDefault(x => x.spoonacularId == id);
     }
 
   }

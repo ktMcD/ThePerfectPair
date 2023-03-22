@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ThePerfectPair.DAL;
 using ThePerfectPair.Models;
+using System.Net;
 
 namespace ThePerfectPair.Controllers
 {
@@ -18,13 +19,15 @@ namespace ThePerfectPair.Controllers
     }
 
     [HttpPost("addfood")]
-    public Food addFood(Food foodToAdd)
+    public bool addFood(Food foodToAdd)
     {
       Food newFood = new Food
       {
         FoodId = foodToAdd.FoodId,
-        Name = foodToAdd.Name,
-        Description = foodToAdd.Description
+        Title = foodToAdd.Title,
+        spoonacularId = foodToAdd.spoonacularId,
+        imageUrl = foodToAdd.imageUrl,
+        linkUrl = foodToAdd.linkUrl
       };
       return repo.AddFood(foodToAdd);
     
