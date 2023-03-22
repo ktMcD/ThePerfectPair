@@ -1,12 +1,17 @@
-<p>pairing-list works!</p>
-<form #getWinePairingForm="ngForm" (ngSubmit)="getWines(getWinePairingForm)">
-    <label for="foodInput">Enter Food:</label><input name="foodInput" id="foodInput" ngModel><button>Find Wines</button>
-<form #getFoodPairingForm="ngForm" (ngSubmit)="getFood(getFoodPairingForm)">
-    <label for="wineInput">Enter Wine:</label><input name="wineInput" id="wineInput" ngModel><button>Find Foods</button>
-    
+<h3 align="center">A great meal needs the perfect glass of wine to complete it. Use our tool to find your perfect pair.
+</h3>
+<div class="w3-row-padding w3-padding-16 w3-center">
+    <form #getWinePairingForm="ngForm" (ngSubmit)="getWines(getWinePairingForm)">
+        <label for="foodInput"></label>
+        <input name="foodInput" id="foodInput" size="30" ngModel>
+        <button>Pair By Food</button>
+    </form><p>OR</p><form #getFoodPairingForm="ngForm" (ngSubmit)="getFood(getFoodPairingForm)">
+        <label for="wineInput"></label>
+        <input name="wineInput" id="wineInput"  size="30" ngModel>
+        <button>Pair By Wine:</button>
     </form>
+</div>
 
-</form>
 <p>{{header}}</p>
 <ul>
     <li *ngFor="let pairing of pairedWines">{{pairing}}</li>
