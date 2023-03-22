@@ -31,6 +31,7 @@ export class PairingServiceService {
   }
 
   AddRecipeToDb(newRecipe: INewRecipe){
+    console.log(newRecipe)
     return this.http.post(`${this.apiUri}/addfood`,newRecipe);
 
   }

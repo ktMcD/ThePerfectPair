@@ -14,16 +14,16 @@ namespace ThePerfectPair.DAL
       return _dbContext.Foods.ToList();
     }
 
-    public bool AddFood(Food food)
+    public Food AddFood(Food food)
     {
 
-      if (FindById(food.spoonacularId) == null)
+      if (FindById(food.spoonacular) == null)
       {
         _dbContext.Foods.Add(food);
         _dbContext.SaveChanges();
-        return true;
+        return GetLatestFood();
       }
-      return false;
+      return GetLatestFood();
     }
     public Food GetLatestFood()
     {
@@ -32,7 +32,7 @@ namespace ThePerfectPair.DAL
 
     public Food FindById(int id)
     {
-      return _dbContext.Foods.AsNoTracking().FirstOrDefault(x => x.spoonacularId == id);
+      return _dbContext.Foods.AsNoTracking().FirstOrDefault(x => x.spoonacular == id);
     }
 
   }

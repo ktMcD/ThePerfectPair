@@ -75,9 +75,8 @@ getRandomRecipe(){
     //console.log(this.recipeTitle)
   
     let newRecipe : INewRecipe= {
-      FoodId:-1,
       Title: this.recipeTitle,
-      spoonacularId: this.recipeId,
+      spoonacular: this.recipeId,
       imageUrl: this.recipeImage,
       linkUrl: this.recipeLink
     }
@@ -88,8 +87,12 @@ getRandomRecipe(){
 
 AddRecipe(newRecipe:INewRecipe){
   console.log(newRecipe)
-  this.repositoryService.AddRecipeToDb(newRecipe)
+  this.repositoryService.AddRecipeToDb(newRecipe).subscribe(
 
+    () => {
+      this.ngOnInit();
+    }
+  );
 }
 
 }

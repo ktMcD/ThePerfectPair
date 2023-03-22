@@ -19,13 +19,13 @@ namespace ThePerfectPair.Controllers
     }
 
     [HttpPost("addfood")]
-    public bool addFood(Food foodToAdd)
+    public Food addFood(Food foodToAdd)
     {
       Food newFood = new Food
       {
-        FoodId = foodToAdd.FoodId,
+        //FoodId = foodToAdd.FoodId,
         Title = foodToAdd.Title,
-        spoonacularId = foodToAdd.spoonacularId,
+        spoonacular = foodToAdd.spoonacular,
         imageUrl = foodToAdd.imageUrl,
         linkUrl = foodToAdd.linkUrl
       };

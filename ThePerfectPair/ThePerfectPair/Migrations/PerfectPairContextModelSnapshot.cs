@@ -84,7 +84,7 @@ namespace ThePerfectPair.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("spoonacularId")
+                    b.Property<int>("spoonacular")
                         .HasColumnType("int");
 
                     b.HasKey("FoodId");
