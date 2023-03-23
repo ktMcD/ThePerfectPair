@@ -12,12 +12,9 @@ namespace ThePerfectPair.Controllers
     WineRepository repo = new WineRepository();
 
     [HttpGet()]
-    public List<Drink> GetAllDrinks()
+    public Drink GetRandomDrink()
     {
-      return repo.GetAllDrinks();
+      return repo.GetRandomDrink();
     }
-
-
-
   }
 }

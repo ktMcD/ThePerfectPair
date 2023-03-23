@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using ThePerfectPair.Models;
 
 namespace ThePerfectPair.DAL
@@ -8,9 +9,34 @@ namespace ThePerfectPair.DAL
     private PerfectPairContext _dbContext = new PerfectPairContext();
 
 
-    public List<Drink> GetAllDrinks()
+    public int GetMaxDrinkIN()
     {
-      return _dbContext.Drinks.ToList();
+      return _dbContext.Drinks.ToList().Count;
+    }
+
+    public Drink GetRandomDrink()
+    {
+      int maxDrinkId = _dbContext.Drinks.ToList().MaxBy(x => x.DrinkId).DrinkId;
+      int minDrinkId = _dbContext.Drinks.ToList().MinBy(x => x.DrinkId).DrinkId;
+
+      Random rnd = new Random();
+      int randomNumber = rnd.Next(minDrinkId, maxDrinkId);
+
+      while (_dbContext.Drinks.Where(x => x.DrinkId == randomNumber) == null)
+      {
+        randomNumber = rnd.Next(minDrinkId, maxDrinkId);
+      }
+
+      Drink myDrink = new Drink();
+      Category myCategory = new Category();
+      myDrink =_dbContext.Drinks.Where(x => x.DrinkId == randomNumber).FirstOrDefault();
+      myDrink.Category.Name = FindCategoryName(myDrink.CategoryId);
+      return myDrink;
+    }
+
+    public string FindCategoryName(int id)
+    {
+      return _dbContext.Categories.Where(x => x.CategoryId == id).FirstOrDefault().Name;
     }
 
     public Drink AddDrink(Drink drink)

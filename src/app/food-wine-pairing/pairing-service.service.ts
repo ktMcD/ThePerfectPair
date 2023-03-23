@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { IFoodWinePair } from '../Interfaces/FoodWinePair';
 import { IWineFoodpair } from '../Interfaces/WineFoodPar';
 import { INewRecipe, IRandomRecipe } from '../Interfaces/RandomRecipe';
+import { IRandomWine } from '../Interfaces/RandomWine';
 
 @Injectable({
   providedIn: 'root'
@@ -12,33 +13,34 @@ export class PairingServiceService {
   private foodApiUri = 'https://api.spoonacular.com/food/wine/dishes?apiKey=6ddefff27b934618bc57cbb8e05d66b4'
   private randomRecipeApiUri = 'https://api.spoonacular.com/recipes/random?number=1&apiKey=6ddefff27b934618bc57cbb8e05d66b4&tags=dinner'
   private apiUri = 'https://localhost:7142/api/Food'
-  apiUriFood : string = ""
-  apiUriWine : string = ""
+  apiUriFood: string = ""
+  apiUriWine: string = ""
   constructor(private http: HttpClient) { }
 
-  getWinePairing(foodInput:string){
+  getWinePairing(foodInput: string) {
     this.apiUriFood = `&food=${foodInput}`
-    return this.http.get<IFoodWinePair>(this.wineApiUri+this.apiUriFood)
+    return this.http.get<IFoodWinePair>(this.wineApiUri + this.apiUriFood)
   }
 
-  getFoodPairing(wineInput:string){
+  getFoodPairing(wineInput: string) {
     this.apiUriWine = `&wine=${wineInput}`
-    return this.http.get<IWineFoodpair>(this.foodApiUri+this.apiUriWine)
+    return this.http.get<IWineFoodpair>(this.foodApiUri + this.apiUriWine)
   }
 
-  getRandomRecipe(){
+  getRandomRecipe() {
     return this.http.get<IRandomRecipe>(this.randomRecipeApiUri)
   }
 
-  AddRecipeToDb(newRecipe: INewRecipe){
-    console.log(newRecipe)
-    return this.http.post(`${this.apiUri}/addfood`,newRecipe);
-
+  getRandomWine() {
+    return this.http.get<IRandomWine>(this.randomRecipeApiUri)
   }
 
-  
-    
-   }
+  AddRecipeToDb(newRecipe: INewRecipe) {
+    console.log(newRecipe)
+    return this.http.post(`${this.apiUri}/addfood`, newRecipe);
 
-  
+  }
+}
+
+
 
