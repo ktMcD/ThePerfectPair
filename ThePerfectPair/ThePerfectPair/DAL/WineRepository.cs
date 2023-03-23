@@ -27,16 +27,14 @@ namespace ThePerfectPair.DAL
         randomNumber = rnd.Next(minDrinkId, maxDrinkId);
       }
 
-      Drink myDrink = new Drink();
-      Category myCategory = new Category();
-      myDrink =_dbContext.Drinks.Where(x => x.DrinkId == randomNumber).FirstOrDefault();
-      myDrink.Category.Name = FindCategoryName(myDrink.CategoryId);
+      Drink myDrink =_dbContext.Drinks.Where(x => x.DrinkId == randomNumber).FirstOrDefault();
+      myDrink.Category = GetDrinksCategory(myDrink.CategoryId);
       return myDrink;
     }
 
-    public string FindCategoryName(int id)
+    public Category GetDrinksCategory(int id)
     {
-      return _dbContext.Categories.Where(x => x.CategoryId == id).FirstOrDefault().Name;
+      return _dbContext.Categories.Where(x => x.CategoryId == id).FirstOrDefault();
     }
 
     public Drink AddDrink(Drink drink)
