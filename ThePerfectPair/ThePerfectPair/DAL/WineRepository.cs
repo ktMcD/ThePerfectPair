@@ -16,15 +16,17 @@ namespace ThePerfectPair.DAL
 
     public Drink GetRandomDrink()
     {
-      int maxDrinkId = _dbContext.Drinks.ToList().MaxBy(x => x.DrinkId).DrinkId;
       int minDrinkId = _dbContext.Drinks.ToList().MinBy(x => x.DrinkId).DrinkId;
+      int maxDrinkId = _dbContext.Drinks.ToList().MaxBy(x => x.DrinkId).DrinkId;
 
       Random rnd = new Random();
       int randomNumber = rnd.Next(minDrinkId, maxDrinkId);
+      List<Drink> matchingDrinks = _dbContext.Drinks.Where(x => x.DrinkId == randomNumber).ToList();
 
-      while (_dbContext.Drinks.Where(x => x.DrinkId == randomNumber) == null)
+      while (matchingDrinks.Count == 0)
       {
         randomNumber = rnd.Next(minDrinkId, maxDrinkId);
+        matchingDrinks = _dbContext.Drinks.Where(x => x.DrinkId == randomNumber).ToList();
       }
 
       Drink myDrink =_dbContext.Drinks.Where(x => x.DrinkId == randomNumber).FirstOrDefault();
