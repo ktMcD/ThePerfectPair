@@ -1,5 +1,4 @@
 export interface INewRecipe {
-    //FoodId:number;
     spoonacular:number;
     Title:string;
     imageUrl:string;

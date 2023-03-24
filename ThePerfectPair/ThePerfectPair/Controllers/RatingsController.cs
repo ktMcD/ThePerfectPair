@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ThePerfectPair.DAL;
+using ThePerfectPair.Models;
 
 namespace ThePerfectPair.Controllers
 {
@@ -8,7 +10,21 @@ namespace ThePerfectPair.Controllers
   public class RatingsController : ControllerBase
   {
 
-    RatingsController repo = new RatingsController();
+    RatingsRepository repo = new RatingsRepository();
+
+    [HttpPost("addrating")]
+    public void addRating(Rating pairRating)
+    {
+      Rating newRating = new Rating
+      {
+        RatingNumber = pairRating.RatingNumber,
+        DrinkId = pairRating.DrinkId,
+        FoodId = pairRating.FoodId,
+        UserComments = pairRating.UserComments
+      };
+      repo.AddRating(newRating);
+
+    }
 
   }
 }
