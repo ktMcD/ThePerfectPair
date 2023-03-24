@@ -1,3 +1,4 @@
 export interface IRandomWine {
-    Title:string;
+    drinkid: number
+    name:string;
 }

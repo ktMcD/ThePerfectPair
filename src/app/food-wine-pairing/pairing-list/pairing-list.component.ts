@@ -5,6 +5,7 @@ import { PairingServiceService } from 'src/app/food-wine-pairing/pairing-service
 import { IFoodWinePair } from 'src/app/Interfaces/FoodWinePair';
 import { INewRecipe, IRandomRecipe, IRecipe } from 'src/app/Interfaces/RandomRecipe';
 import { IRandomWine } from 'src/app/Interfaces/RandomWine';
+import { IRating } from 'src/app/Interfaces/Rating';
 
 
 
@@ -35,6 +36,8 @@ export class PairingListComponent implements OnInit {
   recipeId: number = -1
   recipeImage: string = ""
   recipeLink: string = ""
+  randomFoodId: number = -1
+  randomWineId: number = -1
 
   randomWine: any
   wineTitle: string = ""
@@ -92,11 +95,14 @@ export class PairingListComponent implements OnInit {
   getRandomWine() {
     this.repositoryService.getRandomWine().subscribe(
       (response) => {
+        console.log(response);
         this.randomWine = response;
-        this.wineTitle = response.Title
+        this.wineTitle = response.name
+        this.randomWineId = response.drinkid
 
         let newWine: IRandomWine = {
-          Title: this.wineTitle
+          drinkid: this.randomWineId,
+          name: this.wineTitle
         }
       })
   }
@@ -104,6 +110,24 @@ export class PairingListComponent implements OnInit {
   AddRecipe(newRecipe: INewRecipe) {
     console.log(newRecipe)
     this.repositoryService.AddRecipeToDb(newRecipe).subscribe(
+
+      () => {
+        this.ngOnInit();
+      }
+    );
+  }
+
+  AddRating(form: NgForm) {
+    console.log(form.form.value.ratingdropdown)
+
+    let newRating: IRating = {
+      DrinkId: this.randomWineId,
+      FoodId: this.randomFoodId,
+      RatingNumber: form.form.value.ratingdropdown,
+      UserComments: ""
+    }
+
+    this.repositoryService.AddRatingToDb(newRating).subscribe(
 
       () => {
         this.ngOnInit();
