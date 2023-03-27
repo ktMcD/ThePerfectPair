@@ -6,10 +6,16 @@ namespace ThePerfectPair.DAL
   {
     private PerfectPairContext _dbContext = new PerfectPairContext();
 
-    public void AddRating(Rating pairRating)
+    public Rating AddRating(Rating pairRating)
     {
       _dbContext.Ratings.Add(pairRating);
       _dbContext.SaveChanges();
+      return GetLatestRating();
+    }
+
+    public Rating GetLatestRating()
+    {
+      return _dbContext.Ratings.OrderByDescending(x => x.RatingId).FirstOrDefault();
     }
   }
 }

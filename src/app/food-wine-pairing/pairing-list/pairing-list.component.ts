@@ -38,6 +38,7 @@ export class PairingListComponent implements OnInit {
   recipeLink: string = ""
   randomFoodId: number = -1
   randomWineId: number = -1
+  getLatestId: number = -1
 
   randomWine: any
   wineTitle: string = ""
@@ -92,16 +93,24 @@ export class PairingListComponent implements OnInit {
       })
   }
 
+  getLatestRecipe(){
+    this.repositoryService.getLatestRecipe().subscribe(
+      (response) => {
+        this.getLatestId = response.foodId
+      }
+    )
+  }
+
   getRandomWine() {
     this.repositoryService.getRandomWine().subscribe(
       (response) => {
         console.log(response);
         this.randomWine = response;
         this.wineTitle = response.name
-        this.randomWineId = response.drinkid
+        this.randomWineId = response.drinkId
 
         let newWine: IRandomWine = {
-          drinkid: this.randomWineId,
+          drinkId: this.randomWineId,
           name: this.wineTitle
         }
       })
@@ -118,14 +127,14 @@ export class PairingListComponent implements OnInit {
   }
 
   AddRating(form: NgForm) {
-    console.log(form.form.value.ratingdropdown)
 
     let newRating: IRating = {
       DrinkId: this.randomWineId,
-      FoodId: this.randomFoodId,
+      FoodId: this.getLatestId,
       RatingNumber: form.form.value.ratingdropdown,
       UserComments: ""
     }
+    console.log(newRating)
 
     this.repositoryService.AddRatingToDb(newRating).subscribe(
 

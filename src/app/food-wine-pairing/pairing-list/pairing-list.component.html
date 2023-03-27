@@ -22,7 +22,7 @@
     <li *ngFor="let pairing of pairedFoods">{{pairing}}</li>
 </ul>
 
-<button (click)="getRandomRecipe()">Get random food</button>
+<button (click)="getRandomRecipe()" (click)="getLatestRecipe()">Get random food</button>
 <button (click)="getRandomWine()">Get random wine</button>
 
 <p>{{recipeTitle}}</p>
