@@ -1,0 +1,41 @@
+<h3 align="center">A great meal needs the perfect glass of wine to complete it. Use our tool to find your perfect pair.
+</h3>
+<div class="w3-row-padding w3-padding-16 w3-center">
+    <form #getWinePairingForm="ngForm" (ngSubmit)="getWines(getWinePairingForm)">
+        <label for="foodInput"></label>
+        <input name="foodInput" id="foodInput" size="30" ngModel>
+        <button>Pair By Food</button>
+    </form>
+    <p>OR</p>
+    <form #getFoodPairingForm="ngForm" (ngSubmit)="getFood(getFoodPairingForm)">
+        <label for="wineInput"></label>
+        <input name="wineInput" id="wineInput" size="30" ngModel>
+        <button>Pair By Wine:</button>
+    </form>
+</div>
+
+<p>{{header}}</p>
+<ul>
+    <li *ngFor="let pairing of pairedWines">{{pairing}}</li>
+</ul>
+<ul>
+    <li *ngFor="let pairing of pairedFoods">{{pairing}}</li>
+</ul>
+
+<button (click)="getRandomRecipe()">Get random food</button>
+<button (click)="getRandomWine()">Get random wine</button>
+
+<p>{{recipeTitle}}</p>
+<p>{{wineTitle}}</p>
+<p>How would you rate this pairing?</p>
+
+<form #getRating="ngForm" (ngSubmit)="AddRating(getRating)">
+    <select name="ratingdropdown" id="ratingdropdown" ngModel>
+        <option value="1">Nope</option>
+        <option value="2">It's Ok I guess</option>
+        <option value="3">I like it</option>
+        <option value="4">I love it</option>
+        <option value="5">I wanna marry it</option>
+    </select>
+    <button>Submit My Rating</button>
+</form>
