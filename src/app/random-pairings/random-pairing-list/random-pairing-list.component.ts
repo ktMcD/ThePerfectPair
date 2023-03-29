@@ -84,6 +84,7 @@ export class RandomPairingListComponent implements OnInit {
 
       () => {
         this.ngOnInit();
+        this.getLatestRecipe();
       }
     );
   }
@@ -110,6 +111,7 @@ export class RandomPairingListComponent implements OnInit {
     this.repositoryService.getLatestRecipe().subscribe(
       (response) => {
         this.getLatestId = response.foodId
+        console.log(response);
       }
     )
   }
