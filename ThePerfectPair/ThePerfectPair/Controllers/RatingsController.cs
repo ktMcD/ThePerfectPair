@@ -13,7 +13,7 @@ namespace ThePerfectPair.Controllers
     RatingsRepository repo = new RatingsRepository();
 
     [HttpPost("addrating")]
-    public void addRating(Rating pairRating)
+    public Rating addRating(Rating pairRating)
     {
       Rating newRating = new Rating
       {
@@ -22,7 +22,7 @@ namespace ThePerfectPair.Controllers
         FoodId = pairRating.FoodId,
         UserComments = pairRating.UserComments
       };
-      repo.AddRating(newRating);
+      return repo.AddRating(newRating);
 
     }
 

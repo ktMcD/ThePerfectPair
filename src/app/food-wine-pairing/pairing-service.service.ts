@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IFoodWinePair } from '../Interfaces/FoodWinePair';
 import { IWineFoodpair } from '../Interfaces/WineFoodPar';
-import { INewRecipe, IRandomRecipe } from '../Interfaces/RandomRecipe';
+import { INewRecipe, IRandomRecipe, IRecipe } from '../Interfaces/RandomRecipe';
 import { IRandomWine } from '../Interfaces/RandomWine';
 import { IRating } from '../Interfaces/Rating';
+import { ILatestRecipe } from '../Interfaces/LatestRecipe';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,10 @@ export class PairingServiceService {
 
   getRandomRecipe() {
     return this.http.get<IRandomRecipe>(this.randomRecipeApiUri)
+  }
+
+  getLatestRecipe(){
+    return this.http.get<ILatestRecipe>(`${this.apiUri}/Food/getMostRecentFood`);
   }
 
   getRandomWine() {

@@ -33,5 +33,10 @@ namespace ThePerfectPair.Controllers
     
     }
 
+    [HttpGet("getMostRecentFood")]
+    public Food getFood()
+    {
+      return repo.GetLatestFood();
+    }
   }
 }
