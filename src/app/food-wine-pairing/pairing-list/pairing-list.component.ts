@@ -2,10 +2,6 @@ import { NgFor } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { PairingServiceService } from 'src/app/food-wine-pairing/pairing-service.service';
-import { IFoodWinePair } from 'src/app/Interfaces/FoodWinePair';
-import { INewRecipe, IRandomRecipe, IRecipe } from 'src/app/Interfaces/RandomRecipe';
-import { IRandomWine } from 'src/app/Interfaces/RandomWine';
-import { IRating } from 'src/app/Interfaces/Rating';
 
 
 
@@ -30,19 +26,6 @@ export class PairingListComponent implements OnInit {
   pairedFoods: string[] = []
   header: string = ""
 
-  randomRecipe: any
-  recipes: IRecipe[] = []
-  recipeTitle: string = ""
-  recipeId: number = -1
-  recipeImage: string = ""
-  recipeLink: string = ""
-  randomFoodId: number = -1
-  randomWineId: number = -1
-  getLatestId: number = -1
-
-  randomWine: any
-  wineTitle: string = ""
-
   //newRecipe: IRandomRecipe | any
 
   getWines(form: NgForm) {
@@ -58,89 +41,6 @@ export class PairingListComponent implements OnInit {
     this.header = `Suggested wines for ${this.foodInput}`
       ;
   }
-
-  getFood(form: NgForm) {
-    this.wineInput = form.form.value.wineInput
-    this.repositoryService.getFoodPairing(this.wineInput).subscribe(
-      (response) => {
-        this.WineFoodPair = response;
-        this.pairedFoods = response.pairings
-      })
-    this.pairedWines = []
-    form.resetForm();
-    this.header = `Suggested foods for ${this.wineInput}`
-  }
-
-  getRandomRecipe() {
-    this.repositoryService.getRandomRecipe().subscribe(
-      (response) => {
-        this.randomRecipe = response;
-        this.recipes = response.recipes;
-        this.recipeTitle = this.recipes[0].title
-        this.recipeId = this.recipes[0].id
-        this.recipeImage = this.recipes[0].image
-        this.recipeLink = this.recipes[0].sourceUrl
-        //console.log(this.recipeTitle)
-
-        let newRecipe: INewRecipe = {
-          Title: this.recipeTitle,
-          spoonacular: this.recipeId,
-          imageUrl: this.recipeImage,
-          linkUrl: this.recipeLink
-        }
-        this.AddRecipe(newRecipe)
-
-      })
-  }
-
-  getLatestRecipe(){
-    this.repositoryService.getLatestRecipe().subscribe(
-      (response) => {
-        this.getLatestId = response.foodId
-      }
-    )
-  }
-
-  getRandomWine() {
-    this.repositoryService.getRandomWine().subscribe(
-      (response) => {
-        console.log(response);
-        this.randomWine = response;
-        this.wineTitle = response.name
-        this.randomWineId = response.drinkId
-
-        let newWine: IRandomWine = {
-          drinkId: this.randomWineId,
-          name: this.wineTitle
-        }
-      })
-  }
-
-  AddRecipe(newRecipe: INewRecipe) {
-    console.log(newRecipe)
-    this.repositoryService.AddRecipeToDb(newRecipe).subscribe(
-
-      () => {
-        this.ngOnInit();
-      }
-    );
-  }
-
-  AddRating(form: NgForm) {
-
-    let newRating: IRating = {
-      DrinkId: this.randomWineId,
-      FoodId: this.getLatestId,
-      RatingNumber: form.form.value.ratingdropdown,
-      UserComments: ""
-    }
-    console.log(newRating)
-
-    this.repositoryService.AddRatingToDb(newRating).subscribe(
-
-      () => {
-        this.ngOnInit();
-      }
-    );
-  }
 }
+
+  

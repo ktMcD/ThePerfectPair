@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { RandomPairingListComponent } from './random-pairing-list.component';
 
 describe('RandomPairingListComponent', () => {

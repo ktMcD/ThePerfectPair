@@ -1,0 +1,27 @@
+<!-- Photo Grid-->
+<h3 align="center" id="wine">Pair By Wine</h3>
+<div align="center">
+    <div class="w3-row-padding w3-padding-16 w3-center">
+        <div class="w3-quarter">
+            <img src="https://www.foodandwine.com/thmb/srEHECIjjqIsJfKkhy-oiwcoZ4I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Wine-Guide-Beaujolais-FT-BLOG0722-2000-7f1cac81f5044d3cbfeac708b66c4bea.jpg"
+                alt="WinePour" height="200px" style="width:100%">
+        </div>
+        <div class="w3-quarter">
+            <img src="https://www.realsimple.com/thmb/kMZlkYmZYnfoFt2u4sugYfLVXfE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/red-wine-health-benefits-ce3be96b730b41cc82f128abb75c2395.jpg"
+                alt="Wine and Grapes" height="200px" style="width:100%">
+        </div>
+    </div>
+
+    <div class="w3-row-padding w3-padding-16 w3-center">
+        <form #getFoodPairingForm="ngForm" (ngSubmit)="getFood(getFoodPairingForm)">
+            <label for="wineInput"></label>
+            <input name="wineInput" id="wineInput" size="30" ngModel>
+            <button>Pair By Wine:</button>
+        </form>
+    </div>
+
+    <p>{{header}}</p>
+    <ul>
+        <li *ngFor="let pairing of pairedFoods">{{pairing}}</li>
+    </ul>
+</div>
