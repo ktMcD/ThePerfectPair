@@ -23,7 +23,7 @@ namespace ThePerfectPair.DAL
         _dbContext.SaveChanges();
         return GetLatestFood();
       }
-      return GetLatestFood();
+      return null;
     }
     public Food GetLatestFood()
     {

@@ -27,6 +27,7 @@ export class PairingListComponent implements OnInit {
   FoodWinePair: any
   pairedWines: string[] = []
   WineFoodPair: any
+  newDbRecipe: any
   pairedFoods: string[] = []
   header: string = ""
 
@@ -39,7 +40,6 @@ export class PairingListComponent implements OnInit {
   randomFoodId: number = -1
   randomWineId: number = -1
   getLatestId: number = -1
-
   randomWine: any
   wineTitle: string = ""
 
@@ -88,8 +88,8 @@ export class PairingListComponent implements OnInit {
           imageUrl: this.recipeImage,
           linkUrl: this.recipeLink
         }
-        this.AddRecipe(newRecipe)
-
+        let newDbRecipe = this.AddRecipe(newRecipe);
+        this.getLatestId = this.newDbRecipe.Id;
       })
   }
 
@@ -117,9 +117,7 @@ export class PairingListComponent implements OnInit {
   }
 
   AddRecipe(newRecipe: INewRecipe) {
-    console.log(newRecipe)
     this.repositoryService.AddRecipeToDb(newRecipe).subscribe(
-
       () => {
         this.ngOnInit();
       }
