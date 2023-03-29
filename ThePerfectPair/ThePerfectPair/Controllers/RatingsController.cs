@@ -23,7 +23,6 @@ namespace ThePerfectPair.Controllers
         UserComments = pairRating.UserComments
       };
       return repo.AddRating(newRating);
-
     }
 
   }

@@ -36,7 +36,7 @@ export class PairingServiceService {
   getLatestRecipe(){
     return this.http.get<ILatestRecipe>(`${this.apiUri}/Food/getMostRecentFood`);
   }
-
+  
   getRandomWine() {
     return this.http.get<IRandomWine>(`${this.apiUri}/Wine`);
   }
