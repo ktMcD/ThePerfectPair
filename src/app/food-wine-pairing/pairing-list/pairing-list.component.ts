@@ -2,10 +2,6 @@ import { NgFor } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { PairingServiceService } from 'src/app/food-wine-pairing/pairing-service.service';
-import { IFoodWinePair } from 'src/app/Interfaces/FoodWinePair';
-import { INewRecipe, IRandomRecipe, IRecipe } from 'src/app/Interfaces/RandomRecipe';
-import { IRandomWine } from 'src/app/Interfaces/RandomWine';
-import { IRating } from 'src/app/Interfaces/Rating';
 
 
 
@@ -29,19 +25,6 @@ export class PairingListComponent implements OnInit {
   WineFoodPair: any
   pairedFoods: string[] = []
   header: string = ""
-
-  randomRecipe: any
-  recipes: IRecipe[] = []
-  recipeTitle: string = ""
-  recipeId: number = -1
-  recipeImage: string = ""
-  recipeLink: string = ""
-  randomFoodId: number = -1
-  randomWineId: number = -1
-  getLatestId: number = -1
-
-  randomWine: any
-  wineTitle: string = ""
 
   //newRecipe: IRandomRecipe | any
 
@@ -143,4 +126,5 @@ export class PairingListComponent implements OnInit {
       }
     );
   }
-}
+
+  

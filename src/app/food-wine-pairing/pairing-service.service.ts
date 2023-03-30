@@ -2,21 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IFoodWinePair } from '../Interfaces/FoodWinePair';
 import { IWineFoodpair } from '../Interfaces/WineFoodPar';
-import { INewRecipe, IRandomRecipe, IRecipe } from '../Interfaces/RandomRecipe';
-import { IRandomWine } from '../Interfaces/RandomWine';
-import { IRating } from '../Interfaces/Rating';
-import { ILatestRecipe } from '../Interfaces/LatestRecipe';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PairingServiceService {
   private wineApiUri = 'https://api.spoonacular.com/food/wine/pairing?apiKey=6ddefff27b934618bc57cbb8e05d66b4';
-  private foodApiUri = 'https://api.spoonacular.com/food/wine/dishes?apiKey=6ddefff27b934618bc57cbb8e05d66b4'
-  private randomRecipeApiUri = 'https://api.spoonacular.com/recipes/random?number=1&apiKey=6ddefff27b934618bc57cbb8e05d66b4&tags=dinner'
-  private apiUri = 'https://localhost:7142/api'
   apiUriFood: string = ""
-  apiUriWine: string = ""
   constructor(private http: HttpClient) { }
 
   getWinePairing(foodInput: string) {
@@ -49,7 +41,6 @@ export class PairingServiceService {
     console.log(newRating)
     return this.http.post(`${this.apiUri}/Ratings/addrating`, newRating);
   }
-}
 
 
 

@@ -3,8 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PairingListComponent } from './food-wine-pairing/pairing-list/pairing-list.component';
 
 const routes: Routes = [
-{path: 'food-wine-pair',component:PairingListComponent},
-{ path: '', redirectTo: '/food-wine-pair', pathMatch: 'full' },
+{path: 'food-wine-pair',component:PairingListComponent}
 ];
 
 @NgModule({

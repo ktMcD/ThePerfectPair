@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FoodWinePairingModule } from './food-wine-pairing/food-wine-pairing.module';
 import { RandomPairingsModule } from './random-pairings/random-pairings.module';
+import { WineFoodPairingModule } from './wine-food-pairing/wine-food-pairing.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { RandomPairingsModule } from './random-pairings/random-pairings.module';
     AppRoutingModule,
     HttpClientModule,
     FoodWinePairingModule,
-    RandomPairingsModule
+    RandomPairingsModule,
+    WineFoodPairingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

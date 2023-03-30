@@ -1,4 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { INewRecipe, IRecipe } from 'src/app/Interfaces/RandomRecipe';
+import { IRandomWine } from 'src/app/Interfaces/RandomWine';
+import { IRating } from 'src/app/Interfaces/Rating';
+import { RandomPairingServiceService } from '../random-pairing-service.service';
 
 @Component({
   selector: 'app-random-pairing-list',
@@ -17,32 +22,99 @@ export class RandomPairingListComponent implements OnInit {
   private snackBarDuration: number = 2000;
   ratingArr: any[] = [];
 
-  constructor() {
+  constructor(private repositoryService: RandomPairingServiceService) {
   }
 
 
-  ngOnInit() {
-    console.log("a "+this.starCount)
-    for (let index = 0; index < this.starCount; index++) {
-      this.ratingArr.push(index);
+  ngOnInit(): void {}
+
+  randomRecipe: any
+  recipes: IRecipe[] = []
+  recipeTitle: string = ""
+  recipeId: number = -1
+  recipeImage: string = ""
+  recipeLink: string = ""
+  randomFoodId: number = -1
+  randomWineId: number = -1
+  getLatestId: number = -1
+
+  randomWine: any
+  wineTitle: string = ""
+
+  getRandomRecipe() {
+    this.repositoryService.getRandomRecipe().subscribe(
+      (response) => {
+        this.randomRecipe = response;
+        this.recipes = response.recipes;
+        this.recipeTitle = this.recipes[0].title
+        this.recipeId = this.recipes[0].id
+        this.recipeImage = this.recipes[0].image
+        this.recipeLink = this.recipes[0].sourceUrl
+        //console.log(this.recipeTitle)
+
+        let newRecipe: INewRecipe = {
+          Title: this.recipeTitle,
+          spoonacular: this.recipeId,
+          imageUrl: this.recipeImage,
+          linkUrl: this.recipeLink
+        }
+        this.AddRecipe(newRecipe)
+
+      })
+  }
+
+  getRandomWine() {
+    this.repositoryService.getRandomWine().subscribe(
+      (response) => {
+        console.log(response);
+        this.randomWine = response;
+        this.wineTitle = response.name
+        this.randomWineId = response.drinkId
+
+        let newWine: IRandomWine = {
+          drinkId: this.randomWineId,
+          name: this.wineTitle
+        }
+      })
+  }
+
+  AddRecipe(newRecipe: INewRecipe) {
+    console.log(newRecipe)
+    this.repositoryService.AddRecipeToDb(newRecipe).subscribe(
+
+      () => {
+        this.ngOnInit();
+        this.getLatestRecipe();
+      }
+    );
+  }
+
+  AddRating(form: NgForm) {
+
+    let newRating: IRating = {
+      DrinkId: this.randomWineId,
+      FoodId: this.getLatestId,
+      RatingNumber: form.form.value.ratingdropdown,
+      UserComments: ""
     }
-  }
-  onClick(rating:number) {
-    this.ratingUpdated.emit(rating);
-    return false;
+    console.log(newRating)
+
+    this.repositoryService.AddRatingToDb(newRating).subscribe(
+
+      () => {
+        this.ngOnInit();
+      }
+    );
   }
 
-  showIcon(index:number) {
-    if (this.rating >= index + 1) {
-      return 'star';
-    } else {
-      return 'star_border';
-    }
+  getLatestRecipe(){
+    this.repositoryService.getLatestRecipe().subscribe(
+      (response) => {
+        this.getLatestId = response.foodId
+        console.log(response);
+      }
+    )
   }
+  
+}
 
-}
-export enum StarRatingColor {
-  primary = "primary",
-  accent = "accent",
-  warn = "warn"
-}

@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RandomPairingListComponent } from './random-pairing-list/random-pairing-list.component';
+import { WinePairingListComponent } from './wine-pairing-list/wine-pairing-list.component';
 import { FormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
-    RandomPairingListComponent
+    WinePairingListComponent
   ],
   imports: [
     CommonModule,
     FormsModule
   ],
   exports:[
-    RandomPairingListComponent
+    WinePairingListComponent
   ]
 })
-export class RandomPairingsModule { }
+export class WineFoodPairingModule { }
