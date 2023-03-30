@@ -1,21 +1,22 @@
-<h3 align="center" id="random">Get Random Pairing</h3>
-<div class="w3-row-padding w3-padding-16 w3-center"></div>
-<button (click)="getRandomRecipe()" (click)="getLatestRecipe()">Get random food</button>
-<button (click)="getRandomWine()">Get random wine</button>
+<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
+    <h3 align="center" id="random">Get Random Pairing</h3>
+    <div class="w3-row-padding w3-padding-16 w3-center"></div>
+    <button (click)="getRandomRecipe()" (click)="getLatestRecipe()">Get random food</button>     <button (click)="getRandomWine()">Get random wine</button>
 
-<p>{{recipeTitle}}</p>
-<p>{{wineTitle}}</p>
+    <p>{{recipeTitle}}</p>
+    <p>{{wineTitle}}</p>
 
-<div *ngIf="recipeTitle != '' && wineTitle != ''">
-    <p>How would you rate this pairing?</p>
-    <form #getRating="ngForm" (ngSubmit)="AddRating(getRating)">
-        <select name="ratingdropdown" id="ratingdropdown" ngModel>
-            <option value="1">Nope</option>
-            <option value="2">It's Ok I guess</option>
-            <option value="3">I like it</option>
-            <option value="4">I love it</option>
-            <option value="5">I wanna marry it</option>
-        </select>
-        <button>Submit My Rating</button>
-    </form>
+    <div *ngIf="recipeTitle != '' && wineTitle != ''">
+        <p>How would you rate this pairing?</p>
+        <form #getRating="ngForm" (ngSubmit)="AddRating(getRating)">
+            <select name="ratingdropdown" id="ratingdropdown" ngModel>
+                <option value="1">Nope</option>
+                <option value="2">It's Ok I guess</option>
+                <option value="3">I like it</option>
+                <option value="4">I love it</option>
+                <option value="5">I wanna marry it</option>
+            </select>
+            <button>Submit My Rating</button>
+        </form>
+    </div>
 </div>
