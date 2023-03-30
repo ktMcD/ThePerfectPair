@@ -23,8 +23,8 @@ export class PairingListComponent implements OnInit {
   FoodWinePair: any
   pairedWines: string[] = []
   WineFoodPair: any
-  pairedFoods: string[] = []
   header: string = ""
+  ResponseStatus:string = ""
 
   //newRecipe: IRandomRecipe | any
 
@@ -32,14 +32,20 @@ export class PairingListComponent implements OnInit {
     this.foodInput = form.form.value.foodInput
     this.repositoryService.getWinePairing(this.foodInput).subscribe(
       (response) => {
-        //console.log(JSON.stringify(response))
+        console.log(response)
         this.FoodWinePair = response;
         this.pairedWines = response.pairedWines
+        this.ResponseStatus = response.status
+        form.resetForm();
+        
+        if (this.pairedWines != null) {
+          this.header = `Suggested wines for ${this.foodInput}`;
+        }
+        else{
+          this.header = `We couldn't find any suggested wines for ${this.foodInput}`;
+        }
       })
-    this.pairedFoods = []
-    form.resetForm();
-    this.header = `Suggested wines for ${this.foodInput}`
-      ;
+      
   }
 
   getFood(form: NgForm) {
@@ -127,4 +133,3 @@ export class PairingListComponent implements OnInit {
     );
   }
 
-  
