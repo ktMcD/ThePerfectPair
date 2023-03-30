@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
 
 @Component({
   selector: 'app-welcome-page',
@@ -6,9 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./welcome-page.component.css']
 })
 export class WelcomePageComponent {
+  slidesIndex = 0;
+  @ViewChildren("slides") slides: QueryList<ElementRef>;
+  @ViewChildren("dot") dots: QueryList<ElementRef>;
+  slider$;
 
-  ngOnInit(): void {
-    this.carousel();
+  ngAfterViewInit() {
+    this.showSlides();
   }
 
   pickWineUrl = 'https://www.themillkitchenandbar.com/blog/pick-wine-for-meal';
@@ -22,18 +26,29 @@ export class WelcomePageComponent {
     window.location.href = `${this.pairingUrl}`;
   }
 
-  carousel() {
-    var myIndex = 0;
-    var i;
-    var x = document.getElementsByClassName("mySlides") as HTMLCollectionOf<HTMLElement>;
-    for (i = 0; i < x.length; i++) {
-      x[i].style.display = "none";
+  showSlides() {
+    this.slides.forEach(
+      (slidesDiv: ElementRef) =>
+        (slidesDiv.nativeElement.style.display = "none")
+    );
+    this.slidesIndex += 1;
+
+    if (this.slidesIndex > this.slides.length) {
+      this.slidesIndex = 1;
     }
-    myIndex++;
-
-    if (myIndex > x.length) { myIndex = 1 }
-    x[myIndex - 1].style.display = "block";
-    setTimeout(this.carousel, 2000); // Change image every 2 seconds
+    this.dots.forEach(
+      dotsDiv =>
+      (dotsDiv.nativeElement.className = dotsDiv.nativeElement.className.replace(
+        " active",
+        ""
+      ))
+    );
+    this.slides.toArray()[this.slidesIndex - 1].nativeElement.style.display =
+      "block";
+    this.dots.toArray()[this.slidesIndex - 1].nativeElement.className +=
+      " active";
+    setTimeout(() => {
+      this.showSlides();
+    }, 4000); // Change image every 2 seconds
   }
-
 }

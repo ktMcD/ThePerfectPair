@@ -8,28 +8,51 @@
 </head>
 
 <body>
-    <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
-        <!--!Photo Slideshow! -->
-        <div class="w3-content w3-section" style="max-width:500px">
-            <img class="mySlides"
-                src="https://media.istockphoto.com/id/160836693/photo/celebration.jpg?s=612x612&w=0&k=20&c=TEpNxE955P6EOSvL4ULwWVYs6F6ekGr4-7b2Z4CFCCk="
-                style="width:100%">
-            <img class="mySlides"
-                src="https://www.tastingtable.com/img/gallery/classic-wine-and-food-pairings-you-have-to-try/intro-1644543983.jpg"
-                style="width:100%">
-            <img class="mySlides" src="https://vinepair.com/wp-content/uploads/2017/05/sommelier-social-1.jpg"
-                style="width:100%">
+    <!--!Photo Slideshow! -->
+    <ng-container>
+        <div class="slideshow-container">
+
+            <div #slides class="mySlides fade">
+                <img src="https://media.istockphoto.com/id/160836693/photo/celebration.jpg?s=612x612&w=0&k=20&c=TEpNxE955P6EOSvL4ULwWVYs6F6ekGr4-7b2Z4CFCCk="
+                    width="1000px" height="500px">
+            </div>
+
+            <div #slides class="mySlides fade">
+                <img src="https://www.tastingtable.com/img/gallery/classic-wine-and-food-pairings-you-have-to-try/intro-1644543983.jpg"
+                    width="1000px" height="500px">
+            </div>
+
+            <div #slides class="mySlides fade">
+                <img src="https://vinepair.com/wp-content/uploads/2017/05/sommelier-social-1.jpg" width="1000px"
+                    height="500px">
+            </div>
+
+            <div #slides class="mySlides fade">
+                <img src="https://hopefamilywines.com/wp-content/uploads/2020/10/cabernet-sauvignon-food-pairing.jpg"
+                    width="1000px" height="500px">
+            </div>
+            <div #slides class="mySlides fade">
+                <img src="https://www.cottercrunch.com/wp-content/uploads/2018/11/wine-and-cheese-board-partry-winc-3.jpg"
+                    width="1000px" height="500px">
+            </div>
         </div>
 
-        <!-- !PAGE CONTENT! -->
-        <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
-            <h3 align="center">A great meal needs the perfect glass of wine to complete it. Use our tool to find your
-                perfect pair.
-            </h3>
+        <div style="text-align:center">
+            <span #dot class="dot"></span>
+            <span #dot class="dot"></span>
+            <span #dot class="dot"></span>
+            <span #dot class="dot"></span>
+            <span #dot class="dot"></span>
         </div>
+    </ng-container>
+    <br>
+    <h3 align="center">A great meal needs the perfect glass of wine to complete it. Use our tool to find your
+        perfect pair.
+    </h3>
 
+    <!-- Footer -->
 
-        <!-- Footer -->
+    <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:30px">
         <footer class="w3-row-padding w3-padding-32">
             <div class="w3-third">
                 <h3>ABOUT US</h3>
