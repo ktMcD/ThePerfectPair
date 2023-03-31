@@ -2,6 +2,7 @@ export interface IFoodWinePair {
     pairedWines: string[]
     pairingText: string
     productMatches: IProductMatch[]
+    status: string
   }
   
   export interface IProductMatch {

@@ -10,6 +10,7 @@ const routes: Routes = [
 {path: 'food-wine-pairing', component:PairingListComponent},
 {path: 'wine-food-pairing', component:WinePairingListComponent},
 {path: 'random-pairing', component:RandomPairingListComponent}
+
 ];
 
 @NgModule({
