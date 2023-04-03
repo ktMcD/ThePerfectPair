@@ -24,32 +24,25 @@ export class PairingListComponent implements OnInit {
   pairedWines: string[] = []
   WineFoodPair: any
   header: string = ""
-  pairingText = ""
+  ResponseStatus: string = ""
+
+  //newRecipe: IRandomRecipe | any
 
   getWines(form: NgForm) {
     this.foodInput = form.form.value.foodInput
     this.repositoryService.getWinePairing(this.foodInput).subscribe(
       (response) => {
+        console.log(response)
         this.FoodWinePair = response;
-        this.pairedWines = response.pairedWines;
-        this.pairingText = response.pairingText;
+        this.pairedWines = response.pairedWines
+        this.ResponseStatus = response.status
         form.resetForm();
 
         if (this.pairedWines != null) {
-          if (this.pairedWines.length > 0) {
-            this.header = `~ Suggested wines for ${this.foodInput} ~`;
-          }
-          else if (this.pairingText == "" && this.pairedWines.length == 0) {
-            this.header = `We couldn't find any suggested wines for ${this.foodInput}.
-          Perhaps you'd like to try a random wine choice instead?`;
-          }
-          else {
-            this.header = ""
-          }
+          this.header = `Suggested wines for ${this.foodInput}`;
         }
         else {
-          this.header = `We couldn't find any suggested wines for ${this.foodInput}.
-          Perhaps you'd like to try a random wine choice instead?`;
+          this.header = `We couldn't find any suggested wines for ${this.foodInput}`;
         }
       })
   }

@@ -4,7 +4,6 @@ export interface IFoodWinePair {
     productMatches: IProductMatch[]
     status: string
   }
-  
   export interface IProductMatch {
     id: number
     title: string
