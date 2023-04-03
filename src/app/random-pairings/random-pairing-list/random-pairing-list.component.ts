@@ -26,7 +26,7 @@ export class RandomPairingListComponent implements OnInit {
   }
 
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   randomRecipe: any
   recipes: IRecipe[] = []
@@ -37,9 +37,9 @@ export class RandomPairingListComponent implements OnInit {
   randomFoodId: number = -1
   randomWineId: number = -1
   getLatestId: number = -1
+
   randomWine: any
   wineTitle: string = ""
-  wineImage: string = ""
 
   getRandomRecipe() {
     this.repositoryService.getRandomRecipe().subscribe(
@@ -75,27 +75,7 @@ export class RandomPairingListComponent implements OnInit {
           drinkId: this.randomWineId,
           name: this.wineTitle
         }
-      }
-      )
-      this.getRandomWinePhoto()
-  }
-
-  getRandomWinePhoto() {
-
-    var randomNumber = Math.floor(Math.random() * 4) + 1
-
-    if (randomNumber == 1) {
-      this.wineImage = "https://cdn.i-scmp.com/sites/default/files/d8/images/canvas/2022/11/01/8c0fa913-6541-419d-8133-f08282650598_d0755b16.jpg"
-    }
-    else if (randomNumber == 2) {
-      this.wineImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4zDcprbGNCGYBdOyeybM0P_3Xsj2jkOwzuUDuKbrr79Te98oPaJHU0qM_4zRj54v5E0gmcRAyJSU&usqp=CAU&ec=48665699"
-    }
-    else if (randomNumber == 3) {
-      this.wineImage = "https://www.thespruceeats.com/thmb/lG4vy7EDYyn7NTKPdmOxnh6Y7xM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/close-up-of-wine-bottles-over-white-background-609198963-5844948f5f9b5851e57ef400.jpg"
-    }
-    else {
-      this.wineImage = "https://hips.hearstapps.com/hmg-prod/images/red-wine-1590591610.jpg?crop=1.00xw:1.00xh;0,0&resize=1200:*"
-    }
+      })
   }
 
   AddRecipe(newRecipe: INewRecipe) {
@@ -127,7 +107,7 @@ export class RandomPairingListComponent implements OnInit {
     );
   }
 
-  getLatestRecipe() {
+  getLatestRecipe(){
     this.repositoryService.getLatestRecipe().subscribe(
       (response) => {
         this.getLatestId = response.foodId
@@ -135,6 +115,6 @@ export class RandomPairingListComponent implements OnInit {
       }
     )
   }
-
+  
 }
 
