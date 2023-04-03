@@ -46,19 +46,7 @@ export class RandomPairingListComponent implements OnInit {
         this.recipeId = this.recipes[0].id
         this.recipeImage = this.recipes[0].image
         this.recipeLink = this.recipes[0].sourceUrl
-        this.confirmationText =  " ";
-
-        while (this.recipeTitle.toLowerCase().includes("how to") || this.recipeTitle.toLowerCase().includes("what to make for dinner")) {
-          this.repositoryService.getRandomRecipe().subscribe(
-            (response) => {
-              this.randomRecipe = response;
-              this.recipes = response.recipes;
-              this.recipeTitle = this.recipes[0].title
-              this.recipeId = this.recipes[0].id
-              this.recipeImage = this.recipes[0].image
-              this.recipeLink = this.recipes[0].sourceUrl
-            })
-        }
+        this.confirmationText = " ";
 
         if (this.recipeImage == undefined) {
           this.getRandomFoodPhoto();
@@ -83,7 +71,7 @@ export class RandomPairingListComponent implements OnInit {
         this.randomWine = response;
         this.wineTitle = response.name
         this.randomWineId = response.drinkId
-        this.confirmationText =  " ";
+        this.confirmationText = " ";
 
         let newWine: IRandomWine = {
           drinkId: this.randomWineId,
@@ -170,10 +158,9 @@ export class RandomPairingListComponent implements OnInit {
     )
   }
 
-  DisplayRatingConfirmationText(){
-    this.confirmationText =  "Your rating has been submitted.";
-    
-  
+  DisplayRatingConfirmationText() {
+    this.confirmationText = "Your rating has been submitted.";
+    (document.getElementById("usercommentbox") as HTMLInputElement).value = '';
   }
 }
 

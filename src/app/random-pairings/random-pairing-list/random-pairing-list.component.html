@@ -58,7 +58,7 @@
                     </select>
                     <br>
                     <p>Comments: </p>
-                    <textarea ng-model="string" name="usercommentbox" #usercommentbox rows="3" cols="33"
+                    <textarea id="usercommentbox" name="usercommentbox" #usercommentbox rows="3" cols="33"
                         ng-maxlength="500" [selectionEnd]="0"></textarea>
                     <br>
                     <button (click)="DisplayRatingConfirmationText()">Submit My Rating</button>
