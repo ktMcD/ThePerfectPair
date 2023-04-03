@@ -28,7 +28,7 @@
         <div align="center">
             <table>
                 <tr>
-                    <td><button (click)="getRandomRecipe()">Get Random Food</button></td>
+                    <td><button (click)="getRandomRecipe()">Get Random Recipe</button></td>
                     <td width="300px">&nbsp;</td>
                     <td><button (click)="getRandomWine()">Get Random Wine</button></td>
                 </tr>
@@ -48,7 +48,7 @@
 
             <div *ngIf="recipeTitle != '' && wineTitle != ''">
                 <p>How would you rate this pairing?</p>
-                <form #getRating="ngForm" (ngSubmit)="AddRating(getRating)">
+                <form #getRating="ngForm" (ngSubmit)="AddRating(getRating, usercommentbox.value)">
                     <select name="ratingdropdown" id="ratingdropdown" ngModel>
                         <option value="1">Nope</option>
                         <option value="2">It's Ok I guess</option>
@@ -56,12 +56,19 @@
                         <option value="4">I love it</option>
                         <option value="5">I wanna marry it</option>
                     </select>
-                    <button>Submit My Rating</button>
+                    <br>
+                    <p>Comments: </p>
+                    <textarea ng-model="string" name="usercommentbox" #usercommentbox rows="3" cols="33"
+                        ng-maxlength="500" [selectionEnd]="0"></textarea>
+                    <br>
+                    <button (click)="DisplayRatingConfirmationText()">Submit My Rating</button>
                 </form>
+            </div>
+            <div>
+                <h3 id="confirmation">{{confirmationText}}</h3>
             </div>
         </div>
     </div>
 </body>
 
 </html>
-

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { INewRecipe, IRecipe } from 'src/app/Interfaces/RandomRecipe';
 import { IRandomWine } from 'src/app/Interfaces/RandomWine';
@@ -14,13 +14,8 @@ import { RandomPairingServiceService } from '../random-pairing-service.service';
 
 export class RandomPairingListComponent implements OnInit {
 
-  @Input('rating') rating: number = 3;
-  @Input('starCount') starCount: number = 5;
-  @Input('color') color: string = 'accent';
   @Output() ratingUpdated = new EventEmitter();
-
-  private snackBarDuration: number = 2000;
-  ratingArr: any[] = [];
+  @ViewChild('usercomments') inputName;
 
   constructor(private repositoryService: RandomPairingServiceService) {
   }
@@ -40,6 +35,7 @@ export class RandomPairingListComponent implements OnInit {
   randomWine: any
   wineTitle: string = ""
   wineImage: string = ""
+  confirmationText = ""
 
   getRandomRecipe() {
     this.repositoryService.getRandomRecipe().subscribe(
@@ -50,7 +46,23 @@ export class RandomPairingListComponent implements OnInit {
         this.recipeId = this.recipes[0].id
         this.recipeImage = this.recipes[0].image
         this.recipeLink = this.recipes[0].sourceUrl
-        //console.log(this.recipeTitle)
+        this.confirmationText =  " ";
+
+        while (this.recipeTitle.toLowerCase().includes("how to") || this.recipeTitle.toLowerCase().includes("what to make for dinner")) {
+          this.repositoryService.getRandomRecipe().subscribe(
+            (response) => {
+              this.randomRecipe = response;
+              this.recipes = response.recipes;
+              this.recipeTitle = this.recipes[0].title
+              this.recipeId = this.recipes[0].id
+              this.recipeImage = this.recipes[0].image
+              this.recipeLink = this.recipes[0].sourceUrl
+            })
+        }
+
+        if (this.recipeImage == undefined) {
+          this.getRandomFoodPhoto();
+        }
 
         let newRecipe: INewRecipe = {
           Title: this.recipeTitle,
@@ -58,6 +70,7 @@ export class RandomPairingListComponent implements OnInit {
           imageUrl: this.recipeImage,
           linkUrl: this.recipeLink
         }
+        console.log(newRecipe)
         this.AddRecipe(newRecipe)
 
       })
@@ -70,14 +83,15 @@ export class RandomPairingListComponent implements OnInit {
         this.randomWine = response;
         this.wineTitle = response.name
         this.randomWineId = response.drinkId
+        this.confirmationText =  " ";
 
         let newWine: IRandomWine = {
           drinkId: this.randomWineId,
           name: this.wineTitle
         }
       }
-      )
-      this.getRandomWinePhoto()
+    )
+    this.getRandomWinePhoto()
   }
 
   getRandomWinePhoto() {
@@ -98,6 +112,24 @@ export class RandomPairingListComponent implements OnInit {
     }
   }
 
+  getRandomFoodPhoto() {
+
+    var randomNumber = Math.floor(Math.random() * 4) + 1
+
+    if (randomNumber == 1) {
+      this.recipeImage = "https://previews.123rf.com/images/bdcollins/bdcollins1408/bdcollins140800229/30927503-random-restaurant-served-meals-over-a-wooden-background.jpg"
+    }
+    else if (randomNumber == 2) {
+      this.recipeImage = "https://www.savingyoudinero.com/wp-content/uploads/2021/05/Random-Dinner-Ideas-2.png"
+    }
+    else if (randomNumber == 3) {
+      this.recipeImage = "https://cdn-0.generatormix.com/images/thumbs/random-foods-generator.jpg"
+    }
+    else {
+      this.recipeImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTamvzfbaIZdJfSUBBN_mA64AVqbkWq1HfF_vLO9SV-0Q&usqp=CAU&ec=48665699"
+    }
+  }
+
   AddRecipe(newRecipe: INewRecipe) {
     console.log(newRecipe)
     this.repositoryService.AddRecipeToDb(newRecipe).subscribe(
@@ -109,15 +141,16 @@ export class RandomPairingListComponent implements OnInit {
     );
   }
 
-  AddRating(form: NgForm) {
+  AddRating(form: NgForm, comments: string) {
 
     let newRating: IRating = {
       DrinkId: this.randomWineId,
       FoodId: this.getLatestId,
       RatingNumber: form.form.value.ratingdropdown,
-      UserComments: ""
+      UserComments: comments
     }
     console.log(newRating)
+    form.reset();
 
     this.repositoryService.AddRatingToDb(newRating).subscribe(
 
@@ -125,6 +158,7 @@ export class RandomPairingListComponent implements OnInit {
         this.ngOnInit();
       }
     );
+
   }
 
   getLatestRecipe() {
@@ -136,5 +170,10 @@ export class RandomPairingListComponent implements OnInit {
     )
   }
 
+  DisplayRatingConfirmationText(){
+    this.confirmationText =  "Your rating has been submitted.";
+    
+  
+  }
 }
 
