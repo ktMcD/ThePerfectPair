@@ -1,14 +1,25 @@
-<!-- Photo Grid-->
-<h3 align="center" id="wine">Pair By Wine</h3>
-<div align="center">
+<!DOCTYPE html>
+<html>
+
+<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
+    <h3 align="center">What's a glass of wine without the perfect meal to accompany it?</h3>
+    <!-- Photo Grid-->
     <div class="w3-row-padding w3-padding-16 w3-center">
         <div class="w3-quarter">
             <img src="https://www.foodandwine.com/thmb/srEHECIjjqIsJfKkhy-oiwcoZ4I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Wine-Guide-Beaujolais-FT-BLOG0722-2000-7f1cac81f5044d3cbfeac708b66c4bea.jpg"
-                alt="WinePour" height="200px" style="width:100%">
+                alt="WinePour" height="200px" width="300px">
+        </div>
+        <div class="w3-quarter">
+            <img src="https://thumbs.dreamstime.com/b/red-wine-tasting-cellar-wineglass-bottles-next-to-window-panoramic-view-vineyards-sunset-97732103.jpg"
+                alt="Wine with a view" height="200px" width="300px">
         </div>
         <div class="w3-quarter">
             <img src="https://www.realsimple.com/thmb/kMZlkYmZYnfoFt2u4sugYfLVXfE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/red-wine-health-benefits-ce3be96b730b41cc82f128abb75c2395.jpg"
-                alt="Wine and Grapes" height="200px" style="width:100%">
+                alt="Wine and Grapes" height="200px" width="300px">
+        </div>
+        <div class="w3-quarter">
+            <img src="https://www.foodandwine.com/thmb/ir1Mhc_qWGo4fWlj887-LzVc3_g=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/dessert-wines-what-to-know-FT-BLOG0122-3b0040474802467bb57ea6ee5e4acd92.jpg"
+                alt="Empty cups and wine bottle" height="200px" width="300px">
         </div>
     </div>
 
@@ -16,12 +27,17 @@
         <form #getFoodPairingForm="ngForm" (ngSubmit)="getFood(getFoodPairingForm)">
             <label for="wineInput"></label>
             <input name="wineInput" id="wineInput" size="30" ngModel>
-            <button>Pair By Wine:</button>
+            <button>Pair By Wine</button>
         </form>
     </div>
 
-    <p>{{header}}</p>
-    <ul>
-        <li *ngFor="let pairing of pairedFoods">{{pairing}}</li>
-    </ul>
+    <div class="w3-row-padding w3-padding-16">
+        <p>{{text}}</p>
+        <h1 align="center">{{header}}</h1>
+        <ul>
+            <li align="center" *ngFor="let pairing of pairedFoods">{{pairing | titlecase}}</li>
+        </ul>
+    </div>
 </div>
+
+</html>
