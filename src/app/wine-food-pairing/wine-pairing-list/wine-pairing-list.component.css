@@ -1,0 +1,14 @@
+ul {
+    align-content: center;
+    list-style-type: "\1F35E";
+    font-size: 14pt;
+    list-style-position: inside;
+}
+
+h1{
+    font-size: 16pt;
+}
+
+p{
+    font-size: 14pt;
+}

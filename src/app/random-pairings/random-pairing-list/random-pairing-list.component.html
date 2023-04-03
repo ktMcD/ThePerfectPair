@@ -1,21 +1,67 @@
-<h3 align="center" id="random">Get Random Pairing</h3>
-<div class="w3-row-padding w3-padding-16 w3-center"></div>
-<button (click)="getRandomRecipe()" (click)="getLatestRecipe()">Get random food</button>
-<button (click)="getRandomWine()">Get random wine</button>
+<!DOCTYPE html>
+<html>
 
-<p>{{recipeTitle}}</p>
-<p>{{wineTitle}}</p>
+<body>
+    <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
+        <h3 align="center">Sometimes you just don't know what you want. If you're feeling lucky, try a random pairing.
+        </h3>
+        <!-- Photo Grid-->
+        <div class="w3-row-padding w3-padding-16 w3-center">
+            <div class="w3-quarter">
+                <img src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimg1.cookinglight.timeinc.net%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F4_3_horizontal_-_1200x900%2Fpublic%2F1537825868%2Fcoffee-rubbed-steak-1811-p15.jpg%3Fitok%3DuWAQYdAR"
+                    alt="Steak" height="200px" width="300px">
+            </div>
+            <div class="w3-quarter">
+                <img src="https://thumbs.dreamstime.com/b/red-wine-tasting-cellar-wineglass-bottles-next-to-window-panoramic-view-vineyards-sunset-97732103.jpg"
+                    alt="Wine with a view" height="200px" width="300px">
+            </div>
+            <div class="w3-quarter">
+                <img src=" https://img.freepik.com/free-photo/top-view-table-full-delicious-food-composition_23-2149141353.jpg"
+                    alt="Turkey" height="200px" width="300px">
+            </div>
+            <div class="w3-quarter">
+                <img src="https://www.foodandwine.com/thmb/ir1Mhc_qWGo4fWlj887-LzVc3_g=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/dessert-wines-what-to-know-FT-BLOG0122-3b0040474802467bb57ea6ee5e4acd92.jpg"
+                    alt="Empty cups and wine bottle" height="200px" width="300px">
+            </div>
 
-<div *ngIf="recipeTitle != '' && wineTitle != ''">
-    <p>How would you rate this pairing?</p>
-    <form #getRating="ngForm" (ngSubmit)="AddRating(getRating)">
-        <select name="ratingdropdown" id="ratingdropdown" ngModel>
-            <option value="1">Nope</option>
-            <option value="2">It's Ok I guess</option>
-            <option value="3">I like it</option>
-            <option value="4">I love it</option>
-            <option value="5">I wanna marry it</option>
-        </select>
-        <button>Submit My Rating</button>
-    </form>
-</div>
+        </div>
+        <div align="center">
+            <table>
+                <tr>
+                    <td><button (click)="getRandomRecipe()">Get Random Food</button></td>
+                    <td width="300px">&nbsp;</td>
+                    <td><button (click)="getRandomWine()">Get Random Wine</button></td>
+                </tr>
+                <tr>
+                    <TD *ngIf="recipeTitle != ''"><img src={{recipeImage}} alt="RandomRecipe" height="200px"
+                            width="300px"></TD>
+                    <TD>&nbsp;</TD>
+                    <TD *ngIf="wineTitle != ''"><img src={{wineImage}} alt="RandomWine" height="200px" width="300px">
+                    </TD>
+                </tr>
+                <tr>
+                    <TD>{{recipeTitle}}</TD>
+                    <TD>&nbsp;</TD>
+                    <TD>{{wineTitle}}</TD>
+                </tr>
+            </table>
+
+            <div *ngIf="recipeTitle != '' && wineTitle != ''">
+                <p>How would you rate this pairing?</p>
+                <form #getRating="ngForm" (ngSubmit)="AddRating(getRating)">
+                    <select name="ratingdropdown" id="ratingdropdown" ngModel>
+                        <option value="1">Nope</option>
+                        <option value="2">It's Ok I guess</option>
+                        <option value="3">I like it</option>
+                        <option value="4">I love it</option>
+                        <option value="5">I wanna marry it</option>
+                    </select>
+                    <button>Submit My Rating</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+

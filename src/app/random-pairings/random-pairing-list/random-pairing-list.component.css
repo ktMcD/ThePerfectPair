@@ -15,3 +15,12 @@
         border-radius: 50%;
         color: #ffd740;
     }
+
+    table,
+    p{
+        font-size: 14pt;
+    }
+
+    td{
+        text-align: center;
+    }
