@@ -1,46 +1,27 @@
-<!DOCTYPE html>
-<html>
+<!-- Photo Grid-->
+<h3 align="center">Pair By Food</h3>
+<div class="w3-row-padding w3-padding-16 w3-center">
+  <div class="w3-quarter">
+    <img
+      src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimg1.cookinglight.timeinc.net%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F4_3_horizontal_-_1200x900%2Fpublic%2F1537825868%2Fcoffee-rubbed-steak-1811-p15.jpg%3Fitok%3DuWAQYdAR"
+      alt="Steak" height="200px" style="width:100%">
+  </div>
+  <div class="w3-quarter">
+    <img
+      src="https://www.fsrmagazine.com/sites/default/files/styles/homepage_carousel_2x_640x476/public/top_photos/fancy-foods.jpg?itok=Wcl8NnQ0"
+      alt="FancyFood" height="200px" style="width:100%">
+  </div>
+</div>
 
-<body>
-    <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
-        <h3 align="center">A delicious meal deserves a delicous wine.</h3>
-        <!-- Photo Grid-->
-        <div class="w3-row-padding w3-padding-16 w3-center">
-            <div class="w3-quarter">
-                <img src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimg1.cookinglight.timeinc.net%2Fsites%2Fdefault%2Ffiles%2Fstyles%2F4_3_horizontal_-_1200x900%2Fpublic%2F1537825868%2Fcoffee-rubbed-steak-1811-p15.jpg%3Fitok%3DuWAQYdAR"
-                    alt="Steak" height="200px" width="300px">
-            </div>
-            <div class="w3-quarter">
-                <img src="https://www.fsrmagazine.com/sites/default/files/styles/homepage_carousel_2x_640x476/public/top_photos/fancy-foods.jpg?itok=Wcl8NnQ0"
-                    alt="FancyFood" height="200px" width="300px">
-            </div>
-            <div class="w3-quarter">
-                <img src=" https://img.freepik.com/free-photo/top-view-table-full-delicious-food-composition_23-2149141353.jpg"
-                    alt="Turkey" height="200px" width="300px">
-            </div>
-            <div class="w3-quarter">
-                <img src="https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/healthy-eating-ingredients-1296x728-header.jpg?w=1155&h=1528"
-                    alt="Salmon" height="200px" width="300px">
-            </div>
+<div class="w3-row-padding w3-padding-16 w3-center">
+    <form #getWinePairingForm="ngForm" (ngSubmit)="getWines(getWinePairingForm)">
+        <label for="foodInput"></label>
+        <input name="foodInput" id="foodInput" size="30" ngModel>
+        <button>Pair By Food</button>
+    </form>
+</div>
 
-        </div>
-
-        <div class="w3-row-padding w3-padding-16 w3-center">
-            <form #getWinePairingForm="ngForm" (ngSubmit)="getWines(getWinePairingForm)">
-                <label for="foodInput"></label>
-                <input name="foodInput" id="foodInput" size="30" ngModel>
-                <button>Pair By Food</button>
-            </form>
-        </div>
-
-        <div class="w3-row-padding w3-padding-16">
-            <p>{{pairingText}}</p>
-            <h1 align="center">{{header}}</h1>
-            <ul>
-                <li align="center" *ngFor="let pairing of pairedWines">{{pairing | titlecase}}</li>
-            </ul>
-        </div>
-    </div>
-</body>
-
-</html>
+<p>{{header}}</p>
+<ul>
+    <li *ngFor="let pairing of pairedWines">{{pairing}}</li>
+</ul>
