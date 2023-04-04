@@ -1,6 +1,6 @@
 export interface IRating{
-    RatingNumber: number
-    FoodId: number
-    DrinkId: number
-    UserComments: string
+    ratingNumber: number
+    foodId: number
+    drinkId: number
+    userComments: string
 }

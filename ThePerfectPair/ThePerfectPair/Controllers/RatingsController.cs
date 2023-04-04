@@ -25,5 +25,16 @@ namespace ThePerfectPair.Controllers
       return repo.AddRating(newRating);
     }
 
+    [HttpGet("lastTenRatings")]
+    public List<Rating> getLastRatings()
+    {
+      return repo.GetLast10Ratings();
+    }
+
+    [HttpGet("ratingByValue")]
+    public List<Rating> getRatingByValue(int value)
+    {
+      return repo.GetRatingByValue(value);
+    }
   }
 }
