@@ -1,0 +1,19 @@
+tr {
+    align-content: center;
+    list-style-type: "\2b50";
+    font-size: 14pt;
+    list-style-position: inside;
+}
+
+h1{
+    font-size: 16pt;
+}
+
+p{
+    font-size: 14pt;
+
+}
+
+table {
+    width: 100%;
+  }

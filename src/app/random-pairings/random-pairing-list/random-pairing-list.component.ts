@@ -132,13 +132,14 @@ export class RandomPairingListComponent implements OnInit {
   AddRating(form: NgForm, comments: string) {
 
     let newRating: IRating = {
-      DrinkId: this.randomWineId,
-      FoodId: this.getLatestId,
-      RatingNumber: form.form.value.ratingdropdown,
-      UserComments: comments
+      drinkId: this.randomWineId,
+      foodId: this.getLatestId,
+      ratingNumber: form.form.value.ratingdropdown,
+      userComments: comments
     }
     console.log(newRating)
     form.reset();
+    (document.getElementById("usercommentbox") as HTMLInputElement).value = '';
 
     this.repositoryService.AddRatingToDb(newRating).subscribe(
 
@@ -159,8 +160,7 @@ export class RandomPairingListComponent implements OnInit {
   }
 
   DisplayRatingConfirmationText() {
-    this.confirmationText = "Your rating has been submitted.";
-    (document.getElementById("usercommentbox") as HTMLInputElement).value = '';
+    this.confirmationText = "Your rating has been submitted!";
   }
 }
 

@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/a6d45c0a-2963-420b-a669-fc3f27d22ab1/resourceGroups/gc_ah_2022/providers/Microsoft.Web/sites/theperfectpairing",
+    "appService.deploySubpath": "dist\\the-perfect-pair"
+}
