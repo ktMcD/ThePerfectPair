@@ -36,7 +36,7 @@
                 <tr *ngFor="let rating of Ratings">
                     <TD><img src={{getStarPhoto(rating.ratingNumber)}} height="100px" width="200px"></TD>
                     <TD>{{rating.ratingNumber}}</TD>
-                    <TD>{{getDrinkById(rating.drinkId)}}</TD>
+                    <TD>{{rating.drinkId}}</TD>
                     <TD>{{rating.foodId}}</TD>
                     <td>{{rating.userComments}}</td>
                 </tr>

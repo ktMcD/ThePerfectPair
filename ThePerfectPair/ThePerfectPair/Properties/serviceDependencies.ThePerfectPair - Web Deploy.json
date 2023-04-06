@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/gc-ag-2022-db-di/databases/ThePerfectPair",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:PairingDb",
+      "dynamicId": null
+    }
+  }
+}
