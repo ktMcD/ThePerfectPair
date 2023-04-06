@@ -36,5 +36,17 @@ namespace ThePerfectPair.Controllers
     {
       return repo.GetRatingByValue(value);
     }
+
+    [HttpGet("drinkById")]
+    public string getDrinkById(int value)
+    {
+      return repo.GetDrinkNameById(value);
+    }
+
+    [HttpGet("foodById")]
+    public string getFoodById(int value)
+    {
+      return repo.GetFoodNameById(value);
+    }
   }
 }

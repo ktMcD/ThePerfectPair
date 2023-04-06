@@ -27,17 +27,17 @@
         <div align="w3-left">
             <table>
                 <tr>
-                    <td>Where's the column</td>
-                    <td>Overall Rating</td>
-                    <td>Recipe</td>
-                    <td>Drink</td>
-                    <td>Comments</td>
+                    <td></td>
+                    <td><b>Overall Rating</b></td>
+                    <td><b>Drink</b></td>
+                    <td><b>Recipe</b></td>
+                    <td><b>Comments</b></td>
                 </tr>
                 <tr *ngFor="let rating of Ratings">
                     <TD><img src={{getStarPhoto(rating.ratingNumber)}} height="100px" width="200px"></TD>
                     <TD>{{rating.ratingNumber}}</TD>
+                    <TD>{{getDrinkById(rating.drinkId)}}</TD>
                     <TD>{{rating.foodId}}</TD>
-                    <TD>{{rating.drinkId}}</TD>
                     <td>{{rating.userComments}}</td>
                 </tr>
             </table>

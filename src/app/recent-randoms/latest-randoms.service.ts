@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { INewRecipe, IRandomRecipe } from '../Interfaces/RandomRecipe';
+import { IRandomWine } from '../Interfaces/RandomWine';
 import { IRating } from '../Interfaces/Rating';
 
 @Injectable({
@@ -17,5 +19,13 @@ export class LatestRandomsService {
 
   getRatingByValue(value: number) {
     return this.http.get<IRating>(`${this.apiUri}/Ratings/ratingByValue`)
+  }
+
+  getDrinkById(value: number) {
+    return this.http.get(`${this.apiUri}/Ratings/drinkById`)
+  }
+
+  getFoodById(value: number) {
+    return this.http.get(`${this.apiUri}/Ratings/foodById`)
   }
 }
